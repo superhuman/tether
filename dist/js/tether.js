@@ -513,7 +513,10 @@ function now() {
   };
 
   if (typeof window !== 'undefined' && typeof window.addEventListener !== 'undefined') {
-    ['resize', 'scroll', 'touchmove'].forEach(function (event) {
+    // NOTE(ibash) I removed the touchmove event because it leads to google
+    // chrome blocking the main thread when scrolling.
+    // ref: https://github.com/superhuman/superhuman/issues/790
+    ['resize', 'scroll'].forEach(function (event) {
       window.addEventListener(event, tick);
     });
   }
